@@ -1,0 +1,50 @@
+version: 2
+
+models:
+  - name: int_intercom__calendar
+    description: continuous daily calendar spine for joining operational metrics
+    columns:
+      - name: calendar_date
+        description: calendar date key
+
+  - name: int_intercom__daily_base
+    description: daily aggregated KPIs (conversations, backlog, FRT, CSAT, AI counts)
+    columns:
+      - name: calendar_date
+        description: calendar date
+      - name: conversations
+      - name: avg_first_response_time_sec
+        description: average first response time in seconds
+      - name: avg_csat
+        description: average customer satisfaction rating (1–5 scale)
+      - name: open_conversations
+        description: count of open conversations on that day
+      - name: ai_conversations
+        description: number of AI-assisted conversations
+
+  - name: int_intercom__ai_v_human_metrics
+    description: daily comparison of AI vs human conversations and performance
+    columns:
+      - name: calendar_date
+        tests:
+          - not_null
+      - name: ai_agent_participated
+        tests:
+          - accepted_values:
+              values: [true, false]
+      - name: conversations
+        tests:
+          - not_null
+
+  - name: int_intercom__source_summary
+    description: daily conversation metrics by source/channel
+    columns:
+      - name: calendar_date
+        description: calendar date
+      - name: source_type
+        description: conversation source/channel
+      - name: conversations
+        tests:
+          - not_null
+      - name: ai_participation_rate
+        description: share of AI assisted conversations for that source

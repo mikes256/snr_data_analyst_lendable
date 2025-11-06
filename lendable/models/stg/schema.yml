@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: stg_intercom__data
+    description: >
+      cleaned and typed staging model for Intercom conversations data.
+      standardises timestamps, IDs, and boolean flags for downstream operational reporting.
+
+    columns:
+      - name: conversation_id
+        description: unique conversation identifier
+
+      - name: created_at_utc
+        description: Conversation creation timestamp (UTC)
+
+      - name: updated_at_utc
+        description: last updated timestamp for the conversation
+
+      - name: state
+        description: current state of the conversation (open/closed)
+
+      - name: source_type
+        description: channel through which the conversation originated
+
+      - name: rating_value
+        description: customer satisfaction rating (1–5 scale, may be null if unrated)
+
+      - name: ai_agent_participated
+        description: whether AI participated in the conversation
+        tests:
+          - accepted_values:
+              values: [true, false]

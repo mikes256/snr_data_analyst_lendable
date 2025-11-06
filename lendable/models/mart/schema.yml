@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: mart_intercom__operations_performance
+    description: daily x source reporting table combining demand, servicing, CSAT, AI, and backlog KPIs.
+
+    columns:
+      - name: calendar_date
+        description: calendar day
+
+      - name: source_type
+        description: conversation source/channel
+
+      - name: conversations
+        description: total conversations (day x source)
+
+      - name: conv_28d_ma
+        description: 28-day moving average of conversations
+
+      - name: avg_frt_sec
+        description: average first response time (seconds)
+
+      - name: p50_frt_sec
+        description: median first response time (seconds)
+
+      - name: frt_sla_hit_rate
+        description: share of conversations meeting FRT SLA (0–1)
+
+      - name: avg_csat
+        description: average CSAT (1–5)
+
+      - name: ratings_count
+        description: count of CSAT ratings
