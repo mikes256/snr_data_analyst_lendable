@@ -1,6 +1,3 @@
--- models/marts/mart_intercom__operations_performance.sql
--- Purpose: Combine all key intermediate models into one unified reporting layer
-
 with daily as (
   select
     calendar_date::date as calendar_date,
@@ -37,26 +34,21 @@ calendar as (
   select 
     calendar_date::date as calendar_date
   from {{ ref('int_intercom__calendar') }}
-  -- Calendar spine
+  -- Calendar view
 )
 
 select
+
   c.calendar_date,
   s.source_type,
-
-  -- from source summary
   s.source_conversations,
   s.source_avg_frt_sec,
   s.source_avg_csat,
   s.ai_participation_rate,
-
-  -- from daily summary
   d.conversations as total_conversations,
-  coalesce(d.open_conversations, 0) as open_conversations,     -- ✅ ensures scalar bigint
+  coalesce(d.open_conversations, 0) as open_conversations,
   d.avg_first_response_time_sec,
   d.avg_csat,
-
-  -- from AI vs Human metrics
   a.ai_human_conversations,
   a.ai_human_avg_frt_sec,
   a.ai_human_avg_csat

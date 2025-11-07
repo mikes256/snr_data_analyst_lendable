@@ -1,4 +1,4 @@
--- Continuous daily date spine for snapshots
+-- Continuous agg daily date
 with calendar as (
     select
     generate_series(

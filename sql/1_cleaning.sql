@@ -1,7 +1,7 @@
 WITH d_types as (
     SELECT 
         id TEXT,
-        created_at TEXT,  -- sqlite does not have a dedicated timestamp type
+        created_at TEXT,  -- my reminder sqlite does not have a dedicated date or timestamp type
         source_delivered_as TEXT,
         first_contact_reply_created_at TEXT,
         conversation_rating_created_at TEXT,

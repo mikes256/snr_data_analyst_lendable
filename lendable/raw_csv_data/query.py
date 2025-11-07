@@ -10,4 +10,4 @@ df = conn.execute("""
 """).fetchdf()
 
 # Preview
-print(df.dtypes)
+print(df.head())
